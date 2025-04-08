@@ -16,26 +16,24 @@ class Command(BaseCommand):
         # Drop existing collections
         db.users.drop()
         db.teams.drop()
-        db.activities.drop()
+        db.activity.drop()
         db.leaderboard.drop()
         db.workouts.drop()
 
         # Create users
         users = [
-            User(_id=ObjectId(), username='thundergod', email='thundergod@octofit.edu', password='thundergodpassword'),
-            User(_id=ObjectId(), username='metalgeek', email='metalgeek@octofit.edu', password='metalgeekpassword'),
-            User(_id=ObjectId(), username='zerocool', email='zerocool@octofit.edu', password='zerocoolpassword'),
-            User(_id=ObjectId(), username='crashoverride', email='crashoverride@octofit.edu', password='crashoverridepassword'),
-            User(_id=ObjectId(), username='sleeptoken', email='sleeptoken@octofit.edu', password='sleeptokenpassword'),
+            User(_id=ObjectId(), username='thundergod', email='thundergod@mhigh.edu', password='thundergodpassword'),
+            User(_id=ObjectId(), username='metalgeek', email='metalgeek@mhigh.edu', password='metalgeekpassword'),
+            User(_id=ObjectId(), username='zerocool', email='zerocool@mhigh.edu', password='zerocoolpassword'),
+            User(_id=ObjectId(), username='crashoverride', email='crashoverride@mhigh.edu', password='crashoverridepassword'),
+            User(_id=ObjectId(), username='sleeptoken', email='sleeptoken@mhigh.edu', password='sleeptokenpassword'),
         ]
         User.objects.bulk_create(users)
 
         # Create teams
-        teams = [
-            Team(_id=ObjectId(), name='Blue Team'),
-            Team(_id=ObjectId(), name='Gold Team')
-        ]
-        Team.objects.bulk_create(teams)
+        team = Team(_id=ObjectId(), name='Blue Team')
+        team.save()
+        team.members.add(*users)
 
         # Create activities
         activities = [
